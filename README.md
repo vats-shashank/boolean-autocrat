@@ -1,2 +1,2 @@
-boolean autocrat
+boolean autocrat 
 
