@@ -49,15 +49,10 @@ public class ApicataLogService {
 		}
 
 	}
-
 	public void createApi(ApiCatalogInfo apiCatalog) {
-
 		ApiCatalogInfo apCatalog = apiCatalogDao.getByApiName(apiCatalog.getApiName());
 		if (null == apCatalog) {
-
-			
 			ApiApplication apiApplication = apiAplicationDao.findByAppName(apiCatalog.getApiApplication().getAppName());
-
 			if (null == apiApplication)
 			apiApplication = this.creeateApiApplication(apiCatalog.getApiApplication().getAppName());
 		    UserProfile userProfile=this.getUserInfo(apiCatalog.getUserProfile());
@@ -66,7 +61,6 @@ public class ApicataLogService {
 			apiCatalog.setApiApplication(apiApplication);
 			apiCatalog = apiCatalogDao.save(apiCatalog);
 		} else {
-
 			throw new BusinessException("API name already taken", HttpStatus.CONFLICT);
 		}
 		this.createApiModels(apiCatalog.getApiModels(), apiCatalog);
@@ -75,19 +69,17 @@ public class ApicataLogService {
 	private UserProfile getUserInfo(UserProfile userProfile) {
 		
 		UserProfile usProfile=userProfileDao.findByUserCuid(userProfile.getUserCuid());
-		
 		if (null == usProfile) {
 			userProfile.setUserCuid(userProfile.getUserCuid());
 			userProfile.setEmailAddress(userProfile.getUserCuid() + "@lumen.com");
 			userProfile.setFirstName("firstName");
 			userProfile.setLastName("lastName");
 			userProfile.setSupervisorId("xxx" + (userProfile.getUserCuid()));
-			userProfile=userProfileDao.save(userProfile);
-			userProfileDao.flush();
-	
+			userProfileDao.saveAndFlush(userProfile);
+			return userProfile;
 		}
 		
-		return userProfile;
+		return usProfile;
 	}
 
 	private void createApiModels(List<ApiModel> apiModels, ApiCatalogInfo apiCatalog) {
