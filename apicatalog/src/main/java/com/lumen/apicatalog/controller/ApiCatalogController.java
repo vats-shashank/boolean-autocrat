@@ -2,34 +2,34 @@ package com.lumen.apicatalog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lumen.apicatalog.dao.ApiCatalogDao;
 import com.lumen.apicatalog.exception.BusinessException;
 import com.lumen.apicatalog.model.ApiCatalogInfo;
 import com.lumen.apicatalog.service.ApicataLogService;
 
 @RestController
-@RequestMapping("/api-v1-catalog")
+@RequestMapping(value = "/api-v1-catalog", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ApiCatalogController {
 	
-	@Autowired
-	private ApiCatalogDao apiCatalogDao;
 	
 	@Autowired
 	private ApicataLogService apicataLogService;
 	
 	@PostMapping("/create")
+	@ResponseBody
 	public void createApi(@RequestBody ApiCatalogInfo apiCatalog) {
 		try {
 
-		 apiCatalogDao.save(apiCatalog);
+			apicataLogService.createApi(apiCatalog);
 			
 		} catch (BusinessException e) {
-			throw new BusinessException(HttpStatus.BAD_REQUEST, "", e);
+			throw new BusinessException(HttpStatus.BAD_REQUEST, "error", e);
 		}
 
 	}
@@ -41,7 +41,7 @@ public class ApiCatalogController {
 		apicataLogService.updateApi(apiCatalog);
 			
 		} catch (BusinessException e) {
-			throw new BusinessException(HttpStatus.BAD_REQUEST, "", e);
+			throw new BusinessException(HttpStatus.BAD_REQUEST, "error", e);
 		}
 
 	}

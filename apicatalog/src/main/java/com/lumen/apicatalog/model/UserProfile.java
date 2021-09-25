@@ -17,6 +17,9 @@ public class UserProfile {
 	@Column(name="USER_ID")
 	private long userId;
 	
+	@Column(name="USER_CUID")
+	private String userCuid;
+	
 	@Column(name="FIRST_NAME")      
 	private String firstName;
 	
@@ -27,7 +30,7 @@ public class UserProfile {
 	private String emailAddress;
 	
 	@Column(name="SUPERVISOR_CUID")
-	private Long supervisorId;
+	private String supervisorId;
 
 	public long getUserId() {
 		return userId;
@@ -59,14 +62,6 @@ public class UserProfile {
 
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
-	}
-
-	public Long getSupervisorId() {
-		return supervisorId;
-	}
-
-	public void setSupervisorId(Long supervisorId) {
-		this.supervisorId = supervisorId;
 	}
 
 	
