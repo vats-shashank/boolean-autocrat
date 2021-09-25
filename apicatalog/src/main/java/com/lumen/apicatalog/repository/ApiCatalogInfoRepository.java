@@ -29,4 +29,8 @@ public interface ApiCatalogInfoRepository extends JpaRepository<ApiCatalogInfo, 
 	@Transactional    
 	@Query(value = "select * from TJAM_API_INFO where APP_ID=?1", nativeQuery = true)
 	List<ApiCatalogInfo> getByAppID(String appId);
+	
+	@Transactional    
+	@Query(value = "select * from TJAM_API_INFO where USER_ID=?1", nativeQuery = true)
+	List<ApiCatalogInfo> getAPIByUserCuid(String cuid);
 }

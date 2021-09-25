@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lumen.apicatalog.DTO.ResponseDTO;
-import com.lumen.apicatalog.model.UserProfile;
+import com.lumen.apicatalog.model.ApiCatagory;
 import com.lumen.apicatalog.service.GetService;
-import com.lumen.apicatalog.service.LdapService;
 
 /**
  * 
@@ -89,13 +88,17 @@ public class GetAPIController {
 		responseEntity = new ResponseEntity<List<ResponseDTO>>(responseDTOs, HttpStatus.OK);
 		return responseEntity;
 	}
-	
-	@GetMapping("/apiModel/{apiModel}")
-	public ResponseEntity<List<ResponseDTO>> getAPIByModel(@PathVariable String apiModel) {
+
+	@GetMapping(value= {"/apiModel/{modelName}","/apiModel/{modelName}/{modelType}"})
+	public ResponseEntity<List<ResponseDTO>> getAPIByModel(@PathVariable(name = "modelName") String modelName,@PathVariable(name = "modelType",required = false) String modelType) {
 		ResponseEntity<List<ResponseDTO>> responseEntity = null;
 		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
 		try {
-			responseDTOs.addAll(getService.getAPIByModel(apiModel));
+			if(modelType!=null) {
+				responseDTOs.addAll(getService.getAPIByModelName(modelName));
+			}else {
+				responseDTOs.addAll(getService.getAPIByModelNameType(modelName,modelType));
+			}
 			responseEntity = new ResponseEntity<List<ResponseDTO>>(responseDTOs, HttpStatus.OK);
 		} catch (Exception e) {
 			responseDTOs = null;
@@ -118,13 +121,32 @@ public class GetAPIController {
 		return responseEntity;
 	}
 
-	@Autowired
-	private LdapService ldapService;
-
-	@GetMapping("/getUser/{cuid}")
-	public ResponseEntity<UserProfile> getUser(@PathVariable String cuid) {
-		ResponseEntity<UserProfile> responseEntity = new ResponseEntity<UserProfile>(
-				ldapService.getSetUserProfile(cuid), HttpStatus.OK);
+	@GetMapping("/user/{cuid}")
+	public ResponseEntity<List<ResponseDTO>> getAPIByUserCuid(@PathVariable String cuid) {
+		ResponseEntity<List<ResponseDTO>> responseEntity = null;
+		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
+		try {
+			responseDTOs.addAll(getService.getAPIByUserCuid(cuid));
+			responseEntity = new ResponseEntity<List<ResponseDTO>>(responseDTOs, HttpStatus.OK);
+		} catch (Exception e) {
+			responseDTOs = null;
+			responseEntity = new ResponseEntity<List<ResponseDTO>>(responseDTOs, HttpStatus.BAD_REQUEST);
+		}
+		return responseEntity;
+	}
+	
+	
+	@GetMapping("/categories")
+	public ResponseEntity<List<ApiCatagory>> getAllCategories() {
+		ResponseEntity<List<ApiCatagory>> responseEntity = null;
+		List<ApiCatagory> responseDTOs = new ArrayList<ApiCatagory>();
+		try {
+			responseDTOs.addAll(getService.getAllCategories());
+			responseEntity = new ResponseEntity<List<ApiCatagory>>(responseDTOs, HttpStatus.OK);
+		} catch (Exception e) {
+			responseDTOs = null;
+			responseEntity = new ResponseEntity<List<ApiCatagory>>(responseDTOs, HttpStatus.BAD_REQUEST);
+		}
 		return responseEntity;
 	}
 

@@ -1,6 +1,7 @@
 package com.lumen.apicatalog.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,9 +15,13 @@ import com.lumen.apicatalog.exception.BusinessException;
 import com.lumen.apicatalog.model.ApiApplication;
 import com.lumen.apicatalog.model.ApiCatagory;
 import com.lumen.apicatalog.model.ApiCatalogInfo;
+import com.lumen.apicatalog.model.ApiModel;
+import com.lumen.apicatalog.model.UserProfile;
 import com.lumen.apicatalog.repository.ApiApplicationRepository;
 import com.lumen.apicatalog.repository.ApiCatagoryRepository;
 import com.lumen.apicatalog.repository.ApiCatalogInfoRepository;
+import com.lumen.apicatalog.repository.ApiModelRepository;
+import com.lumen.apicatalog.repository.UserProfileRepository;
 import com.lumen.apicatalog.util.MiscUtility;
 
 @Service
@@ -29,7 +34,10 @@ public class GetService {
 	ApiCatalogInfoRepository apiCatalogInfoRepository;
 	@Autowired
 	ApiApplicationRepository apiApplicationRepository;
-	
+	@Autowired
+	ApiModelRepository apiModelRepository;
+	@Autowired
+	UserProfileRepository userProfileRepository;
 
 	@Autowired
 	MiscUtility miscUtility;
@@ -102,16 +110,41 @@ public class GetService {
 		return responseDTOs;
 	}
 
-	public List<ResponseDTO> getAPIByModel(String apiModel) {
-		logger.info("getAPIByCategory start");
+
+
+	public List<ResponseDTO> getAPIByModelName(String modelName) {
+		logger.info("getAPIByModelName start");
 		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
+		List<ApiCatalogInfo> apiCatalogInfos = new ArrayList<ApiCatalogInfo>();
 		try {
-			
+			List<ApiModel> apiModels = apiModelRepository.getByModelName(modelName);
+			for (ApiModel apiModel : apiModels) {
+				apiCatalogInfos.add(apiModel.getApiCatalogInfo());
+			}
+			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfos);
 		} catch (Exception e) {
-			logger.error("Exception in getAPIByCategory : ", e.getMessage());
+			logger.error("Exception in getAPIByModelName : ", e.getMessage());
 			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}
-		logger.info("getAPIByCategory end");
+		logger.info("getAPIByModelName end");
+		return responseDTOs;
+	}
+
+	public List<ResponseDTO> getAPIByModelNameType(String modelName,String modelType) {
+		logger.info("getAPIByModelNameType start");
+		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
+		List<ApiCatalogInfo> apiCatalogInfos = new ArrayList<ApiCatalogInfo>();
+		try {
+			List<ApiModel> apiModels = apiModelRepository.getByModelName_ModelType(modelName, modelType);
+			for (ApiModel apiModel : apiModels) {
+				apiCatalogInfos.add(apiModel.getApiCatalogInfo());
+			}
+			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfos);
+		} catch (Exception e) {
+			logger.error("Exception in getAPIByModelNameType : ", e.getMessage());
+			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+		}
+		logger.info("getAPIByModelNameType end");
 		return responseDTOs;
 	}
 
@@ -121,7 +154,8 @@ public class GetService {
 		logger.info("getAPIByCategory start");
 		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
 		try {
-			
+			List<ApiCatalogInfo> apiCatalogInfo = apiCatalogInfoRepository.findAll();
+			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfo);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByCategory : ", e.getMessage());
 			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
@@ -137,4 +171,33 @@ public class GetService {
 		logger.info("getApiCatalogInfo end");
 
 	}
+
+	public List<ResponseDTO> getAPIByUserCuid(String cuid) {
+		logger.info("getAPIByUserCuid start");
+		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
+		try {
+			UserProfile userProfile = userProfileRepository.getByCUID(cuid);
+			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfoRepository.getAPIByUserCuid(String.valueOf(userProfile.getUserId())));
+		} catch (Exception e) {
+			logger.error("Exception in getAPIByUserCuid : ", e.getMessage());
+			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+		}
+		logger.info("getAPIByUserCuid end");
+		return responseDTOs;
+	}
+
+	public List<ApiCatagory> getAllCategories() {
+		logger.info("getAPIByUserCuid start");
+		List<ApiCatagory> apiCatagories = new ArrayList<ApiCatagory>();
+		try {
+			apiCatagories = apiCatagoryRepository.findAll();
+		} catch (Exception e) {
+			logger.error("Exception in getAPIByUserCuid : ", e.getMessage());
+			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+		}
+		logger.info("getAPIByUserCuid end");
+		return apiCatagories;
+	}
+	
+	
 }
