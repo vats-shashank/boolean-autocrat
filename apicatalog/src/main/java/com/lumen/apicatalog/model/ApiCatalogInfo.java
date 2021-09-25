@@ -50,7 +50,7 @@ public class ApiCatalogInfo {
 	@JoinColumn(name = "CATEGORY_ID")
 	private ApiCatagory apiCatagory; 
     
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
 	@JoinColumn(name="USER_ID")
     private UserProfile userProfile;
     
