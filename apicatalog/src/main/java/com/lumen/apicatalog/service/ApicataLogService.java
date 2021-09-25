@@ -1,18 +1,22 @@
 package com.lumen.apicatalog.service;
 
-import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lumen.apicatalog.dao.ApiAplicationDao;
 import com.lumen.apicatalog.dao.ApiCatalogDao;
+import com.lumen.apicatalog.dao.ApiModelDao;
 import com.lumen.apicatalog.exception.BusinessException;
 import com.lumen.apicatalog.model.ApiApplication;
 import com.lumen.apicatalog.model.ApiCatalogInfo;
+import com.lumen.apicatalog.model.ApiModel;
 
 @Service
+@Transactional
 public class ApicataLogService {
 
 	@Autowired
@@ -20,6 +24,11 @@ public class ApicataLogService {
 	
 	@Autowired
 	private ApiAplicationDao apiAplicationDao;
+	
+	private static String MODEL_STATUS="ACTIVE";
+	
+	@Autowired
+	private ApiModelDao apiModelDao;
 
 	public void updateApi(ApiCatalogInfo apiCatalog) {
 
@@ -48,15 +57,21 @@ public class ApicataLogService {
 		
 		if(null==apiApplication)
 			apiApplication=	this.creeateApiApplication(apiCatalog.getApiApplication().getAppName());
-		
 			apiCatalog.setApiApplication(apiApplication);
-			apiCatalog.setCreatedDate(new Date(System.currentTimeMillis()));
-			apiCatalog.setUpdatedDate(new Date(System.currentTimeMillis()));
-			apiCatalogDao.save(apiCatalog);
+			apiCatalog=	apiCatalogDao.save(apiCatalog);
 		} else {
 			throw new BusinessException(HttpStatus.BAD_REQUEST, "API Name already taken");
 		}
+       this.createApiModels(apiCatalog.getApiModels(),apiCatalog);
+	}
 
+	private void createApiModels(List<ApiModel> apiModels,ApiCatalogInfo apiCatalog ) {
+		for(ApiModel apiModel:apiModels)
+		{
+			apiModel.setStatus(MODEL_STATUS);
+			apiModel.setApiCatalogInfo(apiCatalog);
+			apiModelDao.save(apiModel);	
+		}
 	}
 
 	private ApiApplication creeateApiApplication(String applicationName) {

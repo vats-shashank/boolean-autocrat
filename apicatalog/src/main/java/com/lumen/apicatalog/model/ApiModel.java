@@ -10,8 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="tjam_api_model")
 public class ApiModel {
 	
 	@Id
@@ -28,6 +30,9 @@ public class ApiModel {
 	
 	@Column(name="MODEL_NAME")
 	private String modelName;
+	
+	@Column(name="MODEL_TYPE")
+	private String modelType;
 	
 	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name="apiId")
@@ -71,6 +76,14 @@ public class ApiModel {
 
 	public void setApiCatalogInfo(ApiCatalogInfo apiCatalogInfo) {
 		this.apiCatalogInfo = apiCatalogInfo;
+	}
+
+	public String getModelType() {
+		return modelType;
+	}
+
+	public void setModelType(String modelType) {
+		this.modelType = modelType;
 	}
 	
 	
