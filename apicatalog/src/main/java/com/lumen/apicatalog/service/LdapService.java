@@ -140,7 +140,7 @@ public class LdapService {
 			userProfile.setFirstName(firstName);
 			userProfile.setEmailAddress(mail);
 			userProfile.setLastName(lastName);
-			userProfile.setSupervisorId((managerCuid));
+//			userProfile.setSupervisorId((managerCuid));
 			/*ObjectMapper mapper = new ObjectMapper();
 			response = mapper.writeValueAsString(userProfile);*/
 

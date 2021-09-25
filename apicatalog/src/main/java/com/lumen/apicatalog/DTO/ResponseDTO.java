@@ -1,6 +1,9 @@
 package com.lumen.apicatalog.DTO;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.lumen.apicatalog.model.ApiModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,22 +27,21 @@ public class ResponseDTO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	String TJAM_APP_NAME;
-	String CATEGORY_NAME;
-	String MODEL_NAME;
-	String MODEL_STATUS;
-	
+
 	String API_NAME;
-	String API_ID;
-	String API_STATUS;
 	String API_DESC;
 	String SWAGGER_URL;
+	String API_STATUS;
+	String API_ID;
 	
+	String APP_ID;	
+	String APP_NAME;
 	String USER_ID;
-	String CATEGORY_ID;
-	String APP_ID;
-	String MODEL_ID;
-	
+	String CUID;
 	String EMAIL_ADDRESS;
+	String CATEGORY_ID;
+	String CATEGORY_NAME;
+	
+	List<ApiModelDTO> API_MODEL;
+	
 }
