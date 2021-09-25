@@ -25,5 +25,6 @@ public class ApiModelDTO implements Serializable{
 	String MODEL_STATUS;
 	String MODEL_NAME;
 	String MODEL_TYPE;
+	String API_Id;
 
 }

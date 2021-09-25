@@ -1,7 +1,6 @@
 package com.lumen.apicatalog.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.lumen.apicatalog.DTO.ApiModelDTO;
 import com.lumen.apicatalog.DTO.ResponseDTO;
 import com.lumen.apicatalog.exception.BusinessException;
 import com.lumen.apicatalog.model.ApiApplication;
@@ -112,40 +112,34 @@ public class GetService {
 
 
 
-	public List<ResponseDTO> getAPIByModelName(String modelName) {
+	public List<ApiModelDTO> getAPIByModelName(String modelName) {
 		logger.info("getAPIByModelName start");
-		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
-		List<ApiCatalogInfo> apiCatalogInfos = new ArrayList<ApiCatalogInfo>();
+		List<ApiModelDTO> apiModelDTOs = new ArrayList<ApiModelDTO>();
+		List<ApiModel> apiModels = new ArrayList<ApiModel>();
 		try {
-			List<ApiModel> apiModels = apiModelRepository.getByModelName(modelName);
-			for (ApiModel apiModel : apiModels) {
-				apiCatalogInfos.add(apiModel.getApiCatalogInfo());
-			}
-			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfos);
+			apiModels = apiModelRepository.getByModelName(modelName);
+			apiModelDTOs = miscUtility.getApiModelDTO(apiModels);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByModelName : ", e.getMessage());
 			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}
 		logger.info("getAPIByModelName end");
-		return responseDTOs;
+		return apiModelDTOs;
 	}
 
-	public List<ResponseDTO> getAPIByModelNameType(String modelName,String modelType) {
+	public List<ApiModelDTO> getAPIByModelNameType(String modelName,String modelType) {
 		logger.info("getAPIByModelNameType start");
-		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
-		List<ApiCatalogInfo> apiCatalogInfos = new ArrayList<ApiCatalogInfo>();
+		List<ApiModelDTO> apiModelDTOs = new ArrayList<ApiModelDTO>();
+		List<ApiModel> apiModels = new ArrayList<ApiModel>();
 		try {
-			List<ApiModel> apiModels = apiModelRepository.getByModelName_ModelType(modelName, modelType);
-			for (ApiModel apiModel : apiModels) {
-				apiCatalogInfos.add(apiModel.getApiCatalogInfo());
-			}
-			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfos);
+			apiModels = apiModelRepository.getByModelName_ModelType(modelName, modelType);
+			apiModelDTOs = miscUtility.getApiModelDTO(apiModels);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByModelNameType : ", e.getMessage());
 			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}
 		logger.info("getAPIByModelNameType end");
-		return responseDTOs;
+		return apiModelDTOs;
 	}
 
 
