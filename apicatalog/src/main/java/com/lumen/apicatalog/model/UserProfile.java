@@ -64,5 +64,21 @@ public class UserProfile {
 		this.emailAddress = emailAddress;
 	}
 
+	public String getUserCuid() {
+		return userCuid;
+	}
+
+	public void setUserCuid(String userCuid) {
+		this.userCuid = userCuid;
+	}
+
+	public String getSupervisorId() {
+		return supervisorId;
+	}
+
+	public void setSupervisorId(String supervisorId) {
+		this.supervisorId = supervisorId;
+	}
+
 	
 }
