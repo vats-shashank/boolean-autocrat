@@ -73,20 +73,6 @@ public class GetAPIController {
 		return responseEntity;
 	}
 
-	@GetMapping("/apiModel/{apiModel}")
-	public ResponseEntity<List<ResponseDTO>> getAPIByModel(@PathVariable String apiModel) {
-		ResponseEntity<List<ResponseDTO>> responseEntity = null;
-		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
-		try {
-			responseDTOs.addAll(getService.getAPIByModel(apiModel));
-			responseEntity = new ResponseEntity<List<ResponseDTO>>(responseDTOs, HttpStatus.OK);
-		} catch (Exception e) {
-			responseDTOs = null;
-			responseEntity = new ResponseEntity<List<ResponseDTO>>(responseDTOs, HttpStatus.BAD_REQUEST);
-		}
-		return responseEntity;
-	}
-
 	@GetMapping("/apiAppName/{apiAppName}")
 	public ResponseEntity<List<ResponseDTO>> getAPIByAppName(@PathVariable String apiAppName) {
 		ResponseEntity<List<ResponseDTO>> responseEntity = null;
@@ -101,6 +87,20 @@ public class GetAPIController {
 		}
 
 		responseEntity = new ResponseEntity<List<ResponseDTO>>(responseDTOs, HttpStatus.OK);
+		return responseEntity;
+	}
+	
+	@GetMapping("/apiModel/{apiModel}")
+	public ResponseEntity<List<ResponseDTO>> getAPIByModel(@PathVariable String apiModel) {
+		ResponseEntity<List<ResponseDTO>> responseEntity = null;
+		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
+		try {
+			responseDTOs.addAll(getService.getAPIByModel(apiModel));
+			responseEntity = new ResponseEntity<List<ResponseDTO>>(responseDTOs, HttpStatus.OK);
+		} catch (Exception e) {
+			responseDTOs = null;
+			responseEntity = new ResponseEntity<List<ResponseDTO>>(responseDTOs, HttpStatus.BAD_REQUEST);
+		}
 		return responseEntity;
 	}
 

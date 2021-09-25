@@ -7,12 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lumen.apicatalog.model.ApiCatagory;
+import com.lumen.apicatalog.model.ApiApplication;
 
 @Repository
-public interface ApiCatagoryRepository extends JpaRepository<ApiCatagory, Long> {
-	@Transactional    
-	@Query(value="select * from TJAM_API_CATEGORY where CATEGORY_NAME like %?1%", nativeQuery = true)
-		List<ApiCatagory> getByCategoryName(String categoryName);
-	
+public interface ApiApplicationRepository extends JpaRepository<ApiApplication, Long> {
+	@Transactional
+	@Query(value = "select * from TJAM_API_APPLICATION where TJAM_APP_NAME like %?1%", nativeQuery = true)
+	List<ApiApplication> getByAppName(String appName);
 }

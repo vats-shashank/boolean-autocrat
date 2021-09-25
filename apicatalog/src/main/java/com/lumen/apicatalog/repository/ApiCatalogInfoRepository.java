@@ -16,4 +16,17 @@ public interface ApiCatalogInfoRepository extends JpaRepository<ApiCatalogInfo, 
 	@Query(value = "select * from TJAM_API_INFO where CATEGORY_ID=?1", nativeQuery = true)
 	List<ApiCatalogInfo> getByCategoryId(String categoryId);
 
+	
+	@Transactional
+	@Query(value = "select * from TJAM_API_INFO where API_NAME like %?1%", nativeQuery = true)
+	List<ApiCatalogInfo> getByApiName(String text);
+	
+	@Transactional
+	@Query(value = "select * from TJAM_API_INFO where API_DESC like %?1%", nativeQuery = true)
+	List<ApiCatalogInfo> getByApiDec(String text);
+	
+	
+	@Transactional    
+	@Query(value = "select * from TJAM_API_INFO where APP_ID=?1", nativeQuery = true)
+	List<ApiCatalogInfo> getByAppID(String appId);
 }
