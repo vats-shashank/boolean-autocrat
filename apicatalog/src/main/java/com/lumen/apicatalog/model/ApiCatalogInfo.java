@@ -1,5 +1,6 @@
 package com.lumen.apicatalog.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
@@ -17,8 +18,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="TJAM_API_INFO")
-public class ApiCatalogInfo {
+public class ApiCatalogInfo implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="API_ID")
