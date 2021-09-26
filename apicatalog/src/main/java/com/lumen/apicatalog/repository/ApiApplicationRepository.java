@@ -14,4 +14,7 @@ public interface ApiApplicationRepository extends JpaRepository<ApiApplication, 
 	@Transactional
 	@Query(value = "select * from TJAM_API_APPLICATION where TJAM_APP_NAME like %?1%", nativeQuery = true)
 	List<ApiApplication> getByAppName(String appName);
+	
+	@Transactional
+	List<ApiApplication> findByAppNameContainingIgnoreCase(String text);
 }
