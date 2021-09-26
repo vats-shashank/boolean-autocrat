@@ -3,8 +3,6 @@ package com.lumen.apicatalog.DTO;
 import java.io.Serializable;
 import java.util.List;
 
-import com.lumen.apicatalog.model.ApiModel;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;

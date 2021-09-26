@@ -140,7 +140,7 @@ public class LdapService {
 			userProfile.setFirstName(firstName);
 			userProfile.setEmailAddress(mail);
 			userProfile.setLastName(lastName);
-//			userProfile.setSupervisorId((managerCuid));
+			userProfile.setSupervisorId((managerCuid));
 			/*ObjectMapper mapper = new ObjectMapper();
 			response = mapper.writeValueAsString(userProfile);*/
 
@@ -164,7 +164,7 @@ public class LdapService {
 	 */
 	public void setup(String cuid) throws Exception {
 			try {
-//				String appDN = null;
+				String appDN = null;
 				int minConnInt = 1;
 				int maxConnInt = 10;
 				if (minConn != null && minConn.length() > 0){
@@ -182,7 +182,7 @@ public class LdapService {
 					logger.error("Non-existent application CUID: [" + appCUID + "], throw new Exception...");
 					throw new Exception("Non-existent application CUID: [" + appCUID + "]");
 				}
-//				appDN = appEntry.getDN();
+				appDN = appEntry.getDN();
 				logger.info("appDN is: " + appDN);
 
 				// Empty the non-SSL connection pool

@@ -71,5 +71,13 @@ public class UserProfile {
 	public void setUserCuid(String userCuid) {
 		this.userCuid = userCuid;
 	}
+
+	public String getSupervisorId() {
+		return supervisorId;
+	}
+
+	public void setSupervisorId(String supervisorId) {
+		this.supervisorId = supervisorId;
+	}
 	
 }
