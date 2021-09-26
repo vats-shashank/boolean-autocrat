@@ -13,13 +13,13 @@
     <br />
     <br />
     <a href="https://github.com/vats-shashank/boolean-autocrat/blob/main/flow.png">Api Flow</a>
-    ·
-    <a href="https://github.com/vats-shashank/boolean-autocrat/blob/main/flow.png">Notification Flow</a>
-    .
-    <a href="https://github.com/vats-shashank/boolean-autocrat/blob/main/flow.png">Schedule Notification Flow</a>
-    .
+    *
+    <a href="https://github.com/vats-shashank/boolean-autocrat/blob/add_before_main/notificationFlow.png">Notification Flow</a>
+    *
+    <a href="https://github.com/vats-shashank/boolean-autocrat/blob/add_before_main/scheduledNotificationFlow.png">Schedule Notification Flow</a>
+    *
     <a href="mailto:shashank.vats@lumen.com; Rajeev.K.Singh@lumen.com; Poojamonal.Bhoyar@centurylink.com; Harshith.Venkatesh@centurylink.com ;Manoranjan.Mishra@centurylink.com">Report Bug</a>
-    ·
+    *
     <a href="mailto:shashank.vats@lumen.com; Rajeev.K.Singh@lumen.com; Poojamonal.Bhoyar@centurylink.com; Harshith.Venkatesh@centurylink.com ;Manoranjan.Mishra@centurylink.com">Request Feature</a>
   </p>
 </p>
