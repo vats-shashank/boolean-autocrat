@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name="TJAM_API_INFO")
 public class ApiCatalogInfo implements Serializable{
@@ -52,7 +54,7 @@ public class ApiCatalogInfo implements Serializable{
     @Column(name="MODIFIED_DATE")
     private Date updatedDate;
    
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
 	@JoinColumn(name = "CATEGORY_ID")
 	private ApiCatagory apiCatagory; 
     

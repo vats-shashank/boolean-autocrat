@@ -23,8 +23,9 @@ import com.lumen.apicatalog.service.GetService;
  *
  */
 @RestController
-@CrossOrigin(origins = "*")
+/* @CrossOrigin(origins = "*") */
 @RequestMapping("/api-v1-get")
+
 public class GetAPIController {
 
 	@Autowired

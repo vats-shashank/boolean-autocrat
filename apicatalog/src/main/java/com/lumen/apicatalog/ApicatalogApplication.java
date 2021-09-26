@@ -13,6 +13,9 @@ import org.springframework.jms.support.converter.MappingJackson2MessageConverter
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
 import org.springframework.util.ErrorHandler;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @EnableJms
 @SpringBootApplication
@@ -53,6 +56,5 @@ public class ApicatalogApplication {
 	    converter.setTypeIdPropertyName("_type");
 	    return converter;
 	  }
-
-
+	  
 }
