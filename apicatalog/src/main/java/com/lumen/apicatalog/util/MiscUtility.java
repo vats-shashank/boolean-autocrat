@@ -19,21 +19,21 @@ public class MiscUtility {
 			for (ApiCatalogInfo apiCatalogInfo : apiCatalogInfos) {
 				responseDTO = new ResponseDTO();
 
-				responseDTO.setAPI_NAME(apiCatalogInfo.getApiName());
-				responseDTO.setAPI_DESC(apiCatalogInfo.getApiDescription());
-				responseDTO.setSWAGGER_URL(apiCatalogInfo.getApiSwagUrl());
-				responseDTO.setAPI_STATUS(apiCatalogInfo.getStatus());
-				responseDTO.setAPI_ID(String.valueOf(apiCatalogInfo.getApiId()));
+				responseDTO.setApiName(apiCatalogInfo.getApiName());
+				responseDTO.setApiDescription(apiCatalogInfo.getApiDescription());
+				responseDTO.setApiSwagUrl(apiCatalogInfo.getApiSwagUrl());
+				responseDTO.setStatus(apiCatalogInfo.getStatus());
+				responseDTO.setApiId(String.valueOf(apiCatalogInfo.getApiId()));
 
-				responseDTO.setAPP_ID(String.valueOf(apiCatalogInfo.getApiApplication().getAppId()));
-				responseDTO.setAPP_NAME(apiCatalogInfo.getApiApplication().getAppName());
+				responseDTO.setAppId(String.valueOf(apiCatalogInfo.getApiApplication().getAppId()));
+				responseDTO.setAppName(apiCatalogInfo.getApiApplication().getAppName());
 
-				responseDTO.setUSER_ID(String.valueOf(apiCatalogInfo.getUserProfile().getUserId()));
-				responseDTO.setCUID(apiCatalogInfo.getUserProfile().getUserCuid());
+				responseDTO.setUserId(String.valueOf(apiCatalogInfo.getUserProfile().getUserId()));
+				responseDTO.setUserCuid(apiCatalogInfo.getUserProfile().getUserCuid());
 
-				responseDTO.setEMAIL_ADDRESS(apiCatalogInfo.getUserProfile().getEmailAddress());
-				responseDTO.setCATEGORY_ID(String.valueOf(apiCatalogInfo.getApiCatagory().getApiCatagoryId()));
-				responseDTO.setCATEGORY_NAME(apiCatalogInfo.getApiCatagory().getApiCatagoryName());
+				responseDTO.setEmailAddress(apiCatalogInfo.getUserProfile().getEmailAddress());
+				responseDTO.setApiCatagoryId(String.valueOf(apiCatalogInfo.getApiCatagory().getApiCatagoryId()));
+				responseDTO.setApiCatagoryName(apiCatalogInfo.getApiCatagory().getApiCatagoryName());
 
 				List<ApiModel> apiModels = apiCatalogInfo.getApiModels();
 				ApiModelDTO apiModelDTO = null;
@@ -41,13 +41,14 @@ public class MiscUtility {
 				if (apiModels != null && apiModels.size() > 0) {
 					for (ApiModel apiModel : apiModels) {
 						apiModelDTO = new ApiModelDTO();
-						apiModelDTO.setMODEL_ID(String.valueOf(apiModel.getModelId()));
-						apiModelDTO.setMODEL_NAME(apiModel.getModelName());
-						apiModelDTO.setMODEL_STATUS(apiModel.getStatus());
-						apiModelDTO.setMODEL_TYPE(apiModel.getModelType());
+						apiModelDTO.setModelId(String.valueOf(apiModel.getModelId()));
+						apiModelDTO.setModelName(apiModel.getModelName());
+						apiModelDTO.setStatus(apiModel.getStatus());
+						apiModelDTO.setModelType(apiModel.getModelType());
+						apiModelDTO.setApiId(String.valueOf(apiModel.getApiCatalogInfo().getApiId()));
 						apiModelDTOs.add(apiModelDTO);
 					}
-					responseDTO.setAPI_MODEL(apiModelDTOs);
+					responseDTO.setApiModels(apiModelDTOs);
 				}
 
 				responseDTOs.add(responseDTO);
@@ -62,11 +63,12 @@ public class MiscUtility {
 		if (apiModels != null && apiModels.size() > 0) {
 				for (ApiModel apiModel : apiModels) {
 					apiModelDTO = new ApiModelDTO();
-					apiModelDTO.setMODEL_ID(String.valueOf(apiModel.getModelId()));
-					apiModelDTO.setMODEL_NAME(apiModel.getModelName());
-					apiModelDTO.setMODEL_STATUS(apiModel.getStatus());
-					apiModelDTO.setMODEL_TYPE(apiModel.getModelType());
-					apiModelDTO.setAPI_Id(String.valueOf(apiModel.getApiCatalogInfo().getApiId()));
+					apiModelDTO = new ApiModelDTO();
+					apiModelDTO.setModelId(String.valueOf(apiModel.getModelId()));
+					apiModelDTO.setModelName(apiModel.getModelName());
+					apiModelDTO.setStatus(apiModel.getStatus());
+					apiModelDTO.setModelType(apiModel.getModelType());
+					apiModelDTO.setApiId(String.valueOf(apiModel.getApiCatalogInfo().getApiId()));
 					apiModelDTOs.add(apiModelDTO);
 				}
 		}

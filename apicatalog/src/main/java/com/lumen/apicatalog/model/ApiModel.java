@@ -91,6 +91,12 @@ public class ApiModel implements Serializable {
 	public void setModelType(String modelType) {
 		this.modelType = modelType;
 	}
+
+	@Override
+	public String toString() {
+		return "ApiModel [modelId=" + modelId + ", creDate=" + creDate + ", status=" + status + ", modelName="
+				+ modelName + ", modelType=" + modelType + ", apiCatalogInfo=" + apiCatalogInfo + "]";
+	}
 	
 	
 	

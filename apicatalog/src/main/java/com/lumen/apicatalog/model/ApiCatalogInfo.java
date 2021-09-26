@@ -20,6 +20,13 @@ import javax.persistence.Table;
 @Table(name="TJAM_API_INFO")
 public class ApiCatalogInfo implements Serializable{
 	
+	@Override
+	public String toString() {
+		return "ApiCatalogInfo [apiId=" + apiId + "]";
+	}
+
+
+
 	/**
 	 * 
 	 */
