@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lumen.apicatalog.DTO.ApiModelDTO;
 import com.lumen.apicatalog.DTO.ResponseDTO;
 import com.lumen.apicatalog.model.ApiCatagory;
 import com.lumen.apicatalog.service.GetService;
@@ -23,8 +22,9 @@ import com.lumen.apicatalog.service.GetService;
  *
  */
 @RestController
-@CrossOrigin(origins = "*")
+/* @CrossOrigin(origins = "*") */
 @RequestMapping("/api-v1-get")
+
 public class GetAPIController {
 
 	@Autowired
@@ -91,25 +91,25 @@ public class GetAPIController {
 	}
 
 	@GetMapping(value= {"/apiModel/{modelName}","/apiModel/{modelName}/{modelType}"})
-	public ResponseEntity<List<ApiModelDTO>> getAPIByModel(@PathVariable(name = "modelName") String modelName,@PathVariable(name = "modelType",required = false) String modelType) {
-		ResponseEntity<List<ApiModelDTO>> responseEntity = null;
-		List<ApiModelDTO> responseDTOs = new ArrayList<ApiModelDTO>();
+	public ResponseEntity<List<ResponseDTO>> getAPIByModel(@PathVariable(name = "modelName") String modelName,@PathVariable(name = "modelType",required = false) String modelType) {
+		ResponseEntity<List<ResponseDTO>> responseEntity = null;
+		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
 		try {
 			if(modelType==null) {
 				responseDTOs.addAll(getService.getAPIByModelName(modelName));
 			}else {
 				responseDTOs.addAll(getService.getAPIByModelNameType(modelName,modelType));
 			}
-			responseEntity = new ResponseEntity<List<ApiModelDTO>>(responseDTOs, HttpStatus.OK);
+			responseEntity = new ResponseEntity<List<ResponseDTO>>(responseDTOs, HttpStatus.OK);
 		} catch (Exception e) {
 			responseDTOs = null;
-			responseEntity = new ResponseEntity<List<ApiModelDTO>>(responseDTOs, HttpStatus.BAD_REQUEST);
+			responseEntity = new ResponseEntity<List<ResponseDTO>>(responseDTOs, HttpStatus.BAD_REQUEST);
 		}
 		return responseEntity;
 	}
 
-	@GetMapping("/search/{text}")
-	public ResponseEntity<List<ResponseDTO>> searchAPI(@PathVariable String text) {
+	@GetMapping(value= {"/search","/search/{text}"})
+	public ResponseEntity<List<ResponseDTO>> searchAPI(@PathVariable(name = "text",required = false)  String text) {
 		ResponseEntity<List<ResponseDTO>> responseEntity = null;
 		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
 		try {

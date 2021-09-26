@@ -11,10 +11,10 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.lumen.apicatalog.service.CatalogInfoSvc;
 import com.lumen.apicatalog.constants.Constants;
 import com.lumen.apicatalog.dao.EmailRequest;
 import com.lumen.apicatalog.model.ApiCatalogInfo;
+import com.lumen.apicatalog.service.CatalogInfoSvc;
 
 
 
@@ -34,30 +34,35 @@ public class NotificationScheduler {
 		List<EmailRequest> notifyReqList = new ArrayList<EmailRequest>();
 		List<ApiCatalogInfo> notifyApiList = new ArrayList<ApiCatalogInfo>();
 		
-		notifyApiList=catalogInfoSvc.getAPIInfo().stream().filter(api->isBlank(api.getApiSwagUrl())||api.getApiModels().isEmpty()).collect(Collectors.toList());
-		notifyApiList.stream().forEach(apiInfo->{
-			EmailRequest req= new EmailRequest();
+		notifyApiList = catalogInfoSvc.getAPIInfo()
+				  .stream()
+				  .filter(obj-> isNotValidApi(obj))
+				  .collect(Collectors.toList());
+		
+		notifyApiList.stream().forEach(apiInfo -> {
+			EmailRequest req = new EmailRequest();
 			req.setApiName(apiInfo.getApiName());
 			req.setEmailAddr(apiInfo.getUserProfile().getEmailAddress());
-			req.setSwagger(isBlank(apiInfo.getApiSwagUrl())?"false":"true");
-			req.setModel(apiInfo.getApiModels().isEmpty()?"false":"true");
-			notifyReqList.add(req);
+			req.setSwagger(apiInfo.getApiSwagUrl()==null? "false" : "true");
+			req.setModel((apiInfo.getApiModels()==null ||  apiInfo.getApiModels().size()==0) ? "false" : "true");
+			notifyReqList.add(req); 
 		});
 		
 		notifyReqList.stream().forEach(req->{
-			if (!isBlank(req.getEmailAddr()) )
+			if (req.getEmailAddr()!=null)
 				jmsTemplate.convertAndSend(Constants.MESSAGE_DESTINATION_NAME, req);
 		});
 		
 		logger.info("Done scheduledNotification()");
 	}
-	private boolean isBlank(String apiSwagUrl) {
-		// TODO Auto-generated method stub
-		if (apiSwagUrl==null)
+	
+	private boolean isNotValidApi(ApiCatalogInfo obj) {
+		if (obj.getApiSwagUrl() == null || obj.getApiSwagUrl().isEmpty()) {
 			return true;
-		if (apiSwagUrl.isEmpty())
+		}
+		if (obj.getApiModels() == null || obj.getApiModels().size() == 0) {
 			return true;
-		
+		}
 		return false;
 	}
 

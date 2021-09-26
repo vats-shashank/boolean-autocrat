@@ -9,13 +9,17 @@
   <p align="center">
     Check below links to understand our POC!
     <br />
-    <a href="designDoc.docx"><strong>Explore the docs »</strong></a>
+    <a href="designDoc.docx"><strong>Download Api Doc »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/vats-shashank/boolean-autocrat/blob/main/flow.png">View Flow</a>
-    ·
+    <a href="https://github.com/vats-shashank/boolean-autocrat/blob/main/flow.png">Api Flow</a>
+    .
+    <a href="https://github.com/vats-shashank/boolean-autocrat/blob/main/notificationFlow.png">Notification Flow</a>
+    .
+    <a href="https://github.com/vats-shashank/boolean-autocrat/blob/main/scheduledNotificationFlow.png">Schedule Notification Flow</a>
+    .
     <a href="mailto:shashank.vats@lumen.com; Rajeev.K.Singh@lumen.com; Poojamonal.Bhoyar@centurylink.com; Harshith.Venkatesh@centurylink.com ;Manoranjan.Mishra@centurylink.com">Report Bug</a>
-    ·
+    .
     <a href="mailto:shashank.vats@lumen.com; Rajeev.K.Singh@lumen.com; Poojamonal.Bhoyar@centurylink.com; Harshith.Venkatesh@centurylink.com ;Manoranjan.Mishra@centurylink.com">Request Feature</a>
   </p>
 </p>
