@@ -22,8 +22,14 @@ public interface ApiCatalogInfoRepository extends JpaRepository<ApiCatalogInfo, 
 	List<ApiCatalogInfo> getByApiName(String text);
 	
 	@Transactional
+	List<ApiCatalogInfo> findByApiNameContainingIgnoreCase(String text);
+	
+	@Transactional
 	@Query(value = "select * from TJAM_API_INFO where API_DESC like %?1%", nativeQuery = true)
 	List<ApiCatalogInfo> getByApiDec(String text);
+	
+	@Transactional
+	List<ApiCatalogInfo> findByApiDescriptionContainingIgnoreCase(String text);
 	
 	
 	@Transactional    

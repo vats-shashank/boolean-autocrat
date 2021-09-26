@@ -16,6 +16,14 @@ public interface ApiModelRepository extends JpaRepository<ApiModel, Long>{
 	List<ApiModel> getByModelName(String modelName);
 	
 	@Transactional
+	List<ApiModel> findByModelNameContainingIgnoreCase(String modelName);
+	
+	@Transactional
 	@Query(value = "select * from TJAM_API_MODEL where MODEL_NAME like %?1% and MODEL_TYPE=?2", nativeQuery = true)
 	List<ApiModel> getByModelName_ModelType(String modelName,String modelType);
+	
+	
+	@Transactional
+	@Query(value = "and MODEL_TYPE=?2", nativeQuery = true)
+	List<ApiModel> findByModelNameContainingIgnoreCase(String modelName,String modelType);
 }

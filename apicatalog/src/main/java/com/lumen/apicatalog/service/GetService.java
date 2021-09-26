@@ -59,7 +59,8 @@ public class GetService {
 		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
 		List<ApiCatalogInfo> apiCatalogInfos = new ArrayList<ApiCatalogInfo>();
 		try {
-			List<ApiCatagory> apiCatagorys = apiCatagoryRepository.getByCategoryName(categoryName);
+//			List<ApiCatagory> apiCatagorys = apiCatagoryRepository.getByCategoryName(categoryName);
+			List<ApiCatagory> apiCatagorys = apiCatagoryRepository.findByApiCatagoryNameContainingIgnoreCase(categoryName);
 			if(apiCatagorys!=null && apiCatagorys.size()>0) {
 				for (ApiCatagory apiCatagory : apiCatagorys) {
 					apiCatalogInfos.addAll(apiCatalogInfoRepository.getByCategoryId(String.valueOf(apiCatagory.getApiCatagoryId())));
@@ -84,7 +85,7 @@ public class GetService {
 		logger.info("getAPIByAPIName start");
 		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
 		try {
-			List<ApiCatalogInfo> apiCatalogInfo = apiCatalogInfoRepository.getByApiName(apiName);
+			List<ApiCatalogInfo> apiCatalogInfo = apiCatalogInfoRepository.findByApiNameContainingIgnoreCase(apiName);
 			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfo);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByAPIName : ", e.getMessage());
@@ -104,7 +105,7 @@ public class GetService {
 		logger.info("getAPIByAPIDesc start");
 		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
 		try {
-			List<ApiCatalogInfo> apiCatalogInfo = apiCatalogInfoRepository.getByApiDec(apiDesc);
+			List<ApiCatalogInfo> apiCatalogInfo = apiCatalogInfoRepository.findByApiDescriptionContainingIgnoreCase(apiDesc);
 			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfo);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByAPIDesc : ", e.getMessage());
@@ -125,7 +126,7 @@ public class GetService {
 		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
 		List<ApiCatalogInfo> apiCatalogInfos = new ArrayList<ApiCatalogInfo>();
 		try {
-			List<ApiApplication> apiApplications = apiApplicationRepository.getByAppName(apiAppName);
+			List<ApiApplication> apiApplications = apiApplicationRepository.findByAppNameContainingIgnoreCase(apiAppName);
 			if(apiApplications!=null && apiApplications.size()>0) {
 				for (ApiApplication apiApplication : apiApplications) {
 					apiCatalogInfos.addAll(apiCatalogInfoRepository.getByAppID(String.valueOf(apiApplication.getAppId())));
@@ -152,7 +153,7 @@ public class GetService {
 		List<ApiModel> apiModels = new ArrayList<ApiModel>();
 		List<ApiCatalogInfo> apiCatalogInfos = new ArrayList<ApiCatalogInfo>();
 		try {
-			apiModels = apiModelRepository.getByModelName(modelName);
+			apiModels = apiModelRepository.findByModelNameContainingIgnoreCase(modelName);
 			List<ApiModel> apiModelsFiltered = apiModels.stream() 
 					  .filter(distinctByKey(obj -> obj.getApiCatalogInfo().getApiId())) 
 					  .collect(Collectors.toList());
@@ -197,6 +198,7 @@ public class GetService {
 		List<ApiCatalogInfo> apiCatalogInfos = new ArrayList<ApiCatalogInfo>();
 		try {
 			apiModels = apiModelRepository.getByModelName_ModelType(modelName, modelType);
+//			apiModels = apiModelRepository.findByModelNameContainingIgnoreCase(modelName, modelType);
 			List<ApiModel> apiModelsFiltered = apiModels.stream() 
 					  .filter(distinctByKey(obj -> obj.getApiCatalogInfo().getApiId())) 
 					  .collect(Collectors.toList());
@@ -256,7 +258,7 @@ public class GetService {
 		logger.info("getAPIByUserCuid start");
 		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
 		try {
-			UserProfile userProfile = userProfileRepository.getByCUID(cuid);
+			UserProfile userProfile = userProfileRepository.findByUserCuidContainingIgnoreCase(cuid);
 			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfoRepository.getAPIByUserCuid(String.valueOf(userProfile.getUserId())));
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByUserCuid : ", e.getMessage());
