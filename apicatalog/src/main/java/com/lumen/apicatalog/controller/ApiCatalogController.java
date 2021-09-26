@@ -1,7 +1,6 @@
 package com.lumen.apicatalog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,20 +15,17 @@ import com.lumen.apicatalog.service.ApicataLogService;
 @RestController
 @RequestMapping(value = "/api-v1-catalog", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ApiCatalogController {
-	
-	
+
 	@Autowired
 	private ApicataLogService apicataLogService;
-	
+
 	@PostMapping("/create")
 	@ResponseBody
 	public void createApi(@RequestBody ApiCatalogInfo apiCatalog) {
 		try {
-
 			apicataLogService.createApi(apiCatalog);
-			
 		} catch (BusinessException e) {
-			throw new BusinessException(HttpStatus.BAD_REQUEST, "error", e);
+			throw new BusinessException(e.getMessage(), e.getHttpStatus());
 		}
 
 	}
@@ -37,13 +33,11 @@ public class ApiCatalogController {
 	@PostMapping("/update")
 	public void updateApi(@RequestBody ApiCatalogInfo apiCatalog) {
 		try {
-	
-		apicataLogService.updateApi(apiCatalog);
-			
-		} catch (BusinessException e) {
-			throw new BusinessException(HttpStatus.BAD_REQUEST, "error", e);
+			apicataLogService.updateApi(apiCatalog);
+		} catch (BusinessException be) {
+			throw new BusinessException(be.getMessage(), be.getHttpStatus());
 		}
 
 	}
-	
+
 }

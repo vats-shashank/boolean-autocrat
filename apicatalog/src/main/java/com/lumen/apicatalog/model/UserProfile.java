@@ -79,5 +79,5 @@ public class UserProfile {
 	public void setSupervisorId(String supervisorId) {
 		this.supervisorId = supervisorId;
 	}
-	
+
 }
