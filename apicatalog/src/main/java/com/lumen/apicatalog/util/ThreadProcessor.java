@@ -64,6 +64,7 @@ public class ThreadProcessor {
 					notifyReqList.add(req); 
 				});
 				
+
 				notifyReqList.stream().forEach(req -> {
 					if (req.getEmailAddr()!=null)
 						jmsTemplate.convertAndSend(Constants.MESSAGE_DESTINATION_NAME, req);
