@@ -43,6 +43,20 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+				<dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-mail</artifactId>
+    	</dependency>
+		<dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-activemq</artifactId>
+	  </dependency>
+	  <dependency>
+	      <groupId>org.apache.activemq</groupId>
+	      <artifactId>activemq-broker</artifactId>
+	  </dependency>
+
 		<!-- Added by Pooja Start -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -60,6 +74,7 @@
 			<version>1.1.0</version>
 		</dependency>
 		<!-- Added by Pooja End -->
+
 	</dependencies>
 
 	

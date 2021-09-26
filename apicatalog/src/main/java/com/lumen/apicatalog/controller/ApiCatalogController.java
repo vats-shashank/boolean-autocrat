@@ -2,12 +2,16 @@ package com.lumen.apicatalog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lumen.apicatalog.constants.Constants;
+import com.lumen.apicatalog.dao.EmailRequest;
 import com.lumen.apicatalog.exception.BusinessException;
 import com.lumen.apicatalog.model.ApiCatalogInfo;
 import com.lumen.apicatalog.service.ApicataLogService;
@@ -18,6 +22,9 @@ public class ApiCatalogController {
 
 	@Autowired
 	private ApicataLogService apicataLogService;
+	
+	@Autowired
+	private JmsTemplate jmsTemplate;
 
 	@PostMapping("/create")
 	@ResponseBody
@@ -39,5 +46,10 @@ public class ApiCatalogController {
 		}
 
 	}
-
+	
+	@PostMapping("/sendMail")
+	public void sendMail(@RequestBody EmailRequest req) {
+		
+		jmsTemplate.convertAndSend(Constants.MESSAGE_DESTINATION_NAME, req);
+	}
 }
