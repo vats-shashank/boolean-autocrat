@@ -13,18 +13,14 @@
     <a href="designDoc.docx"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/vats-shashank/boolean-autocrat">View Demo</a>
+    <a>
+      <img src="flow.png" alt="Logo" width="500" height="200">
+      View Demo
+    </a>
     ·
     <a href="mailto:shashank.vats@lumen.com; Rajeev.K.Singh@lumen.com; Poojamonal.Bhoyar@centurylink.com; Harshith.Venkatesh@centurylink.com ;Manoranjan.Mishra@centurylink.com">Report Bug</a>
     ·
     <a href="mailto:shashank.vats@lumen.com; Rajeev.K.Singh@lumen.com; Poojamonal.Bhoyar@centurylink.com; Harshith.Venkatesh@centurylink.com ;Manoranjan.Mishra@centurylink.com">Request Feature</a>
-  </p>
-  <br /><br /><br />
-  <p>
-    <p align="center">
-  <a>
-    <img src="flow.png" alt="Logo" width="500" height="200">
-  </a>
   </p>
 </p>
 
