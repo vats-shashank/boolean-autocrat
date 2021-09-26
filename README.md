@@ -15,7 +15,7 @@
     <br />
     <a href="https://github.com/vats-shashank/boolean-autocrat">View Demo</a>
     ·
-    <a href="mailto:shashank.vats@centurylink.com; Rajeev.K.Singh@lumen.com; Poojamonal.Bhoyar@centurylink.com; Harshith.Venkatesh@centurylink.com ;Manoranjan.Mishra@centurylink.com">Report Bug</a>
+    <a href="mailto:shashank.vats@lumen.com; Rajeev.K.Singh@lumen.com; Poojamonal.Bhoyar@centurylink.com; Harshith.Venkatesh@centurylink.com ;Manoranjan.Mishra@centurylink.com">Report Bug</a>
     ·
     <a href="https://github.com/vats-shashank/boolean-autocrat">Request Feature</a>
   </p>
