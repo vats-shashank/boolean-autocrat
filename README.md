@@ -7,7 +7,7 @@
   <h3 align="center">Lumen Tech Jam 2021</h3>
 
   <p align="center">
-    Read below to understand our POC!
+    Check below links to understand our POC!
     <br />
     <a href="designDoc.docx"><strong>Explore the docs »</strong></a>
     <br />
