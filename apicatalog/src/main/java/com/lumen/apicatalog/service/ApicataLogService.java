@@ -31,6 +31,8 @@ public class ApicataLogService {
 	private UserProfileDao userProfileDao;
 
 	private static String MODEL_STATUS = "ACTIVE";
+	
+	private static String EMAIL="Rajeev.K.Singh@lumen.com";
 
 	@Autowired
 	private ApiModelDao apiModelDao;
@@ -71,9 +73,9 @@ public class ApicataLogService {
 		UserProfile usProfile=userProfileDao.findByUserCuid(userProfile.getUserCuid());
 		if (null == usProfile) {
 			userProfile.setUserCuid(userProfile.getUserCuid());
-			userProfile.setEmailAddress(userProfile.getUserCuid() + "@lumen.com");
-			userProfile.setFirstName("firstName");
-			userProfile.setLastName("lastName");
+			userProfile.setEmailAddress(EMAIL);
+			userProfile.setFirstName("XX"+userProfile.getUserCuid()+"Ab");
+			userProfile.setLastName("xxx"+"Last Name");
 			userProfile.setSupervisorId("xxx" + (userProfile.getUserCuid()));
 			userProfileDao.saveAndFlush(userProfile);
 			return userProfile;
