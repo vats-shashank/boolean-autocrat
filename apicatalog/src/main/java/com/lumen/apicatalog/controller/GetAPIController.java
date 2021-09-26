@@ -107,8 +107,8 @@ public class GetAPIController {
 		return responseEntity;
 	}
 
-	@GetMapping("/search/{text}")
-	public ResponseEntity<List<ResponseDTO>> searchAPI(@PathVariable String text) {
+	@GetMapping(value= {"/search","/search/{text}"})
+	public ResponseEntity<List<ResponseDTO>> searchAPI(@PathVariable(name = "text",required = false)  String text) {
 		ResponseEntity<List<ResponseDTO>> responseEntity = null;
 		List<ResponseDTO> responseDTOs = new ArrayList<ResponseDTO>();
 		try {

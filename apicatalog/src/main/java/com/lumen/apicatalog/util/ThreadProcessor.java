@@ -49,52 +49,37 @@ public class ThreadProcessor {
 			List<ResponseDTO> notifyApiList = new ArrayList<ResponseDTO>();
 			
 			if (responseDTO != null && responseDTO.size() > 0) {
+				
 				notifyApiList = responseDTO
 						  .stream()
-						  .filter(obj-> isValidApi(obj))
+						  .filter(obj-> isNotValidApi(obj))
 						  .collect(Collectors.toList());
 				
-				logger.info("notifyApiList.size()===> "+notifyApiList.size());
-								
 				notifyApiList.stream().forEach(apiInfo -> {
 					EmailRequest req = new EmailRequest();
 					req.setApiName(apiInfo.getApiName());
 					req.setEmailAddr(apiInfo.getEmailAddress());
-					req.setSwagger(isBlank(apiInfo.getApiSwagUrl()) ? "false" : "true");
-					req.setModel(apiInfo.getApiModels().isEmpty() ? "false" : "true");
-					notifyReqList.add(req);
+					req.setSwagger(apiInfo.getApiSwagUrl()==null? "false" : "true");
+					req.setModel((apiInfo.getApiModels()==null ||  apiInfo.getApiModels().size()==0) ? "false" : "true");
+					notifyReqList.add(req); 
 				});
 				
-				notifyReqList.forEach(System.out::println);
-
-				/*notifyReqList.stream().forEach(req -> {
+				notifyReqList.stream().forEach(req -> {
 					if (req.getEmailAddr()!=null)
 						jmsTemplate.convertAndSend(Constants.MESSAGE_DESTINATION_NAME, req);
-				});*/
+				});
 			}
 		}
 
-		private boolean isValidApi(ResponseDTO responseDTO) {
+		private boolean isNotValidApi(ResponseDTO responseDTO) {
 			if (responseDTO.getApiSwagUrl() == null || responseDTO.getApiSwagUrl().isEmpty()) {
-				logger.info("responseDTO.getApiSwagUrl() is empty");
-				return false;
+				return true;
 			}
 			if (responseDTO.getApiModels() == null || responseDTO.getApiModels().size() == 0) {
-				logger.info("responseDTO.getApiModels() is empty");
-				return false;
+				return true;
 			}
-
-			return true;
-		}
-
-		private boolean isBlank(String apiSwagUrl) {
-			// TODO Auto-generated method stub
-			if (apiSwagUrl == null)
-				return true;
-			if (apiSwagUrl.isEmpty())
-				return true;
-
 			return false;
 		}
+
 	}
 }

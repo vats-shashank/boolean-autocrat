@@ -91,6 +91,7 @@ public class GetService {
 			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByAPIName end");
+		callEmailNotification(responseDTOs);
 		return responseDTOs;
 	}
 
@@ -110,6 +111,7 @@ public class GetService {
 			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByAPIDesc end");
+		callEmailNotification(responseDTOs);
 		return responseDTOs;
 	}
 	
@@ -135,6 +137,7 @@ public class GetService {
 			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByAppName end");
+		callEmailNotification(responseDTOs);
 		return responseDTOs;
 	}
 
@@ -164,6 +167,7 @@ public class GetService {
 			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByModelName end");
+		callEmailNotification(responseDTOs);
 		return responseDTOs;
 	}
 	
@@ -207,6 +211,7 @@ public class GetService {
 			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByModelNameType end");
+		callEmailNotification(responseDTOs);
 		return responseDTOs;
 	}
 
@@ -226,6 +231,7 @@ public class GetService {
 			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByCategory end");
+		callEmailNotification(responseDTOs);
 		return responseDTOs;
 	}
 
@@ -257,6 +263,7 @@ public class GetService {
 			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByUserCuid end");
+		callEmailNotification(responseDTOs);
 		return responseDTOs;
 	}
 
