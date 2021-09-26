@@ -1,18 +1,29 @@
 package com.lumen.apicatalog.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class ApiModel {
+@Table(name="tjam_api_model")
+public class ApiModel implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="MODEL_ID")
 	private Long modelId;
 	
@@ -25,6 +36,9 @@ public class ApiModel {
 	
 	@Column(name="MODEL_NAME")
 	private String modelName;
+	
+	@Column(name="MODEL_TYPE")
+	private String modelType;
 	
 	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name="apiId")
@@ -68,6 +82,14 @@ public class ApiModel {
 
 	public void setApiCatalogInfo(ApiCatalogInfo apiCatalogInfo) {
 		this.apiCatalogInfo = apiCatalogInfo;
+	}
+
+	public String getModelType() {
+		return modelType;
+	}
+
+	public void setModelType(String modelType) {
+		this.modelType = modelType;
 	}
 	
 	

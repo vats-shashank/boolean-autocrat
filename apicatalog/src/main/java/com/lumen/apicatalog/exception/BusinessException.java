@@ -1,23 +1,46 @@
 package com.lumen.apicatalog.exception;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class BusinessException extends RuntimeException{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5417951331828686001L;
+	
+	private static final long serialVersionUID = 8200342672178420227L;
 
-	public BusinessException(HttpStatus status,String message, Throwable cause) {
-        super(message, cause);
-    }
+	private String message;
+	
+	private HttpStatus httpStatus;
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public HttpStatus getHttpStatus() {
+		return httpStatus;
+	}
+
+	public void setHttpStatus(HttpStatus httpStatus) {
+		this.httpStatus = httpStatus;
+	}
+
+	public BusinessException(String message, HttpStatus httpStatus) {
+		
+		this.message = message;
+		this.httpStatus = httpStatus;
+	}
 
 	
-	public BusinessException(HttpStatus status,String message) {
-        super(message);
-    }
-
+	  public BusinessException() { 
+		  
+		  
+		  
+	  }
+	 
+	
+	
+	
 }
