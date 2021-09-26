@@ -26,7 +26,25 @@ public class ResponseDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	String API_NAME;
+	String apiName;
+	String apiDescription;
+	String apiSwagUrl;
+	String status;
+	String apiId;
+	
+	String appId;	
+	String appName;
+	String userId;
+	String userCuid;
+	String emailAddress;
+	String apiCatagoryId;
+	String apiCatagoryName;
+	
+	List<ApiModelDTO> apiModels;
+	
+	
+	
+	/*String API_NAME;
 	String API_DESC;
 	String SWAGGER_URL;
 	String API_STATUS;
@@ -40,6 +58,6 @@ public class ResponseDTO implements Serializable{
 	String CATEGORY_ID;
 	String CATEGORY_NAME;
 	
-	List<ApiModelDTO> API_MODEL;
+	List<ApiModelDTO> API_MODEL;*/
 	
 }
