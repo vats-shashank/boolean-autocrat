@@ -56,7 +56,7 @@ public class GetService {
 			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfos);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByCategory : ", e.getMessage());
-			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByCategory end");
 		return responseDTOs;
@@ -70,7 +70,7 @@ public class GetService {
 			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfo);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByAPIName : ", e.getMessage());
-			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByAPIName end");
 		return responseDTOs;
@@ -84,7 +84,7 @@ public class GetService {
 			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfo);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByAPIDesc : ", e.getMessage());
-			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByAPIDesc end");
 		return responseDTOs;
@@ -104,7 +104,7 @@ public class GetService {
 			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfos);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByAppName : ", e.getMessage());
-			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByAppName end");
 		return responseDTOs;
@@ -121,7 +121,7 @@ public class GetService {
 			apiModelDTOs = miscUtility.getApiModelDTO(apiModels);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByModelName : ", e.getMessage());
-			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByModelName end");
 		return apiModelDTOs;
@@ -136,7 +136,7 @@ public class GetService {
 			apiModelDTOs = miscUtility.getApiModelDTO(apiModels);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByModelNameType : ", e.getMessage());
-			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByModelNameType end");
 		return apiModelDTOs;
@@ -152,7 +152,7 @@ public class GetService {
 			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfo);
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByCategory : ", e.getMessage());
-			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByCategory end");
 		return responseDTOs;
@@ -174,7 +174,7 @@ public class GetService {
 			responseDTOs = miscUtility.getResponseDTO(apiCatalogInfoRepository.getAPIByUserCuid(String.valueOf(userProfile.getUserId())));
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByUserCuid : ", e.getMessage());
-			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByUserCuid end");
 		return responseDTOs;
@@ -187,7 +187,7 @@ public class GetService {
 			apiCatagories = apiCatagoryRepository.findAll();
 		} catch (Exception e) {
 			logger.error("Exception in getAPIByUserCuid : ", e.getMessage());
-			throw new BusinessException(HttpStatus.BAD_REQUEST, e.getMessage());
+			throw new BusinessException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		logger.info("getAPIByUserCuid end");
 		return apiCatagories;

@@ -6,10 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.lumen.apicatalog.exception.BusinessException;
 import com.lumen.apicatalog.model.UserProfile;
 import com.lumen.apicatalog.repository.UserProfileRepository;
 import com.qwest.MnetLDAP.MnetLDAPService;
@@ -147,11 +145,9 @@ public class LdapService {
 		} catch (LDAPException ldEx) {
 			logger.error("LDAPException caught in getUserFromLDAP(), throw new BusinessException... "
 							+ ldEx.errorCodeToString(), ldEx);
-			throw new BusinessException(HttpStatus.BAD_REQUEST, "LDAPException caught, "+ ldEx.errorCodeToString(), ldEx);
 		} catch (Exception ex) {
 			logger.error("Exception caught in getUserFromLDAP(), throw new BusinessException",
 					ex);
-			throw new BusinessException(HttpStatus.BAD_REQUEST, "Exception caught, "+ex.getMessage());
 		}
 		return userProfile;
 	}
