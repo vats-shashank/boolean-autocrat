@@ -11,7 +11,7 @@
 	<groupId>com.lumen</groupId>
 	<artifactId>apicatalog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>apicatalog</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -42,6 +42,18 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+				<dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-mail</artifactId>
+    	</dependency>
+		<dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-activemq</artifactId>
+	  </dependency>
+	  <dependency>
+	      <groupId>org.apache.activemq</groupId>
+	      <artifactId>activemq-broker</artifactId>
+	  </dependency>
 	</dependencies>
 
 	<build>
