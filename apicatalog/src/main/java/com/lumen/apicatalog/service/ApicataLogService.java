@@ -57,6 +57,10 @@ public class ApicataLogService {
 				System.out.println("inside null" + apiCatagory.getApiCatagoryName());
 				apCatalog.setApiCatagory(apiCatalog.getApiCatagory());
 			}
+			
+			if(!apCatalog.getApiName().equals(apiCatalog.getApiName()) &&null!=apiCatalogDao.getByApiName(apiCatalog.getApiName()))
+			throw new BusinessException("API name already taken", HttpStatus.CONFLICT);
+		
 			apCatalog.setApiName(apiCatalog.getApiName());
 			apCatalog.setApiSwagUrl(apiCatalog.getApiSwagUrl());
 			apCatalog.setApiDescription(apiCatalog.getApiDescription());
@@ -67,24 +71,13 @@ public class ApicataLogService {
 
 			apiCatalog.getApiModels().stream().filter(a -> a.getModelId() > 0).collect(Collectors.toList()).stream()
 					.forEach(b -> existIds.add(b.getModelId()));	
-		
 	    	List<Long> allIds= apCatalog.getApiModels().stream()
                 .map(ApiModel::getModelId).collect(Collectors.toList());
-				
-			
-				    
 			List<Long> remaining=new ArrayList<>(allIds);
 			remaining.removeAll(existIds);
-			
-			System.out.println(remaining.size());
-				       
-			//apiModelDao.deleteByModelIdIn(remaining);
-			
 			remaining.stream().forEach(a->{
 				apiModelDao.delete(apiModelDao.getById(a));
 			});
-			
-			
 
 		} else {
 			throw new BusinessException("Api not found", HttpStatus.NOT_FOUND);
