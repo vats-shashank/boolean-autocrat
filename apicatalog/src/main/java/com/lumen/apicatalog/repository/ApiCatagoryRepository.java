@@ -15,4 +15,7 @@ public interface ApiCatagoryRepository extends JpaRepository<ApiCatagory, Long> 
 	@Query(value="select * from TJAM_API_CATEGORY where CATEGORY_NAME like %?1%", nativeQuery = true)
 		List<ApiCatagory> getByCategoryName(String categoryName);
 	
+	@Transactional    
+		List<ApiCatagory> findByApiCatagoryNameContainingIgnoreCase(String categoryName);
+	
 }
